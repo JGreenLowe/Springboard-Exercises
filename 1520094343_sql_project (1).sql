@@ -77,7 +77,7 @@ SELECT surname, firstname
 FROM  `Members` 
 WHERE joindate = ( 
 SELECT MAX( joindate ) 
-FROM  `Members` )
+FROM  `Members` );
 
 /* Q7: How can you produce a list of all members who have used a tennis court?
 Include in your output the name of the court, and the name of the member
@@ -87,7 +87,7 @@ the member name. */
 SELECT distinct(CONCAT(m.firstname, ' ', m.surname)) as fullname, f.name FROM `Bookings` b
 JOIN `Members` m ON (b.memid = m.memid and b.memid > 0)
 JOIN `Facilities` f on (b.facid = f.facid and b.facid < 2)
-ORDER BY fullname
+ORDER BY fullname;
 
 /* Q8: How can you produce a list of bookings on the day of 2012-09-14 which
 will cost the member (or guest) more than $30? Remember that guests have
@@ -114,7 +114,7 @@ ELSE b.slots * f.membercost
 END
 ) >30
 WHERE b.starttime LIKE  '2012-09-14%'
-ORDER BY totalcost DESC 
+ORDER BY totalcost DESC; 
 
 /* Q9: This time, produce the same result as in Q8, but using a subquery. */
 
@@ -134,7 +134,7 @@ JOIN  `Facilities` f ON ( b.facid = f.facid )
 WHERE b.starttime LIKE  '2012-09-14%'
 ) AS expensive_bookings
 WHERE totalcost >30
-ORDER BY totalcost DESC
+ORDER BY totalcost DESC;
 
 /* Q10: Produce a list of facilities with a total revenue less than 1000.
 The output of facility name and total revenue, sorted by revenue. Remember
