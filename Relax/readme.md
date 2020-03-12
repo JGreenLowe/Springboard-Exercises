@@ -5,15 +5,15 @@ Unfortunately, very few of the factors in the database correlated positively wit
 
 ## Personal Users Were Less Engaged
 As shown in the graph below, users who created an account in order to join another user's personal workspace had only about an 8% chance to become engaged, as compared to an 18-20% chance for users who joined through other methods. This may simply reflect the fact that users joining another user's workspace are using the service as a favor to a friend, rather than based on a long-term professional need. However, out of an abundance of caution, it may be useful to focus marketing efforts *away* from users who joined through another user's personal workspace.
-![https://github.com/JGreenLowe/Springboard-Exercises/blob/master/Relax/Effectiveness%20by%20Source.png](image)
+![](https://github.com/JGreenLowe/Springboard-Exercises/blob/master/Relax/Effectiveness%20by%20Source.png)
 
 ## Some Organizations Had Higher Engagement Levels
 As shown in the graph below, some organizations were more likely than others to have their users become engaged. However, the distribution of user engagement by organization roughly follows a bell curve, suggesting that there is nothing out of the ordinary occurring here. It is possible that the organizations on the right-hand-side of this bell curve are somewhat more likely to produce engaged users, but it is more likely that those organizations accumulated additional engaged users through chance alone. By comparing a random sample of 60% of the users to identify organizations that *appear* to have disproportionately engaged users, and then examining the engagement rates of users by organization in the remaining (held out) 40% of the data, I was able to find that there is only a r=0.19 correlation between the engagement levels of an organization across the two samples -- but if organizational culture were truly driving organizational engagemment, then we would expect a much stronger correlation. A correlation at least as strong as the one we observed could arise through chance alone in a sample of this size about 16% of the time.
-![https://github.com/JGreenLowe/Springboard-Exercises/blob/master/Relax/Effectiveness%20by%20Organization.png](image)
- 
+![](https://github.com/JGreenLowe/Springboard-Exercises/blob/master/Relax/Effectiveness%20by%20Organization.png)
+
 ## Some Organizations Had Higher Engagement Levels
 User engagement varied by month, with a sharp drop in engagement among users who first enrolled in May, and a sharp rise in engagement among users who first enrolled in June. However, as shown by chi-square testing, the variation could have arisen through chance alone.
-![https://github.com/JGreenLowe/Springboard-Exercises/blob/master/Relax/Effectiveness%20by%20Month.png](image)
+![](https://github.com/JGreenLowe/Springboard-Exercises/blob/master/Relax/Effectiveness%20by%20Month.png)
 
 ## Timestamps were Erroneously Duplicated
 The timestamps for a user's final login appear to accurately reflect the date of the user's last login, but not the time of the user's last login -- the time is simply being copied over from the user's first login. For example, a user who first logged in on January 2 at 3:45 pm and who last logged in on May 6 at 10:10 pm would appear to have last logged in on May 6 at 3:45 pm. This makes it challenging to draw accurate inferences from the total length of a user's engagement or from the final time at which a user logged out. If either of these variables is likely to affect engagement, then the databae should be repaired to fix this error.
