@@ -27,7 +27,7 @@ On the other hand, reducing surge pricing could also reduce short-term profits, 
 ## Predictive Modeling
 
 Blah.
-
+<pre>
                            Logit Regression Results                           
 ==============================================================================
 Dep. Variable:                      y   No. Observations:                40000
@@ -55,3 +55,4 @@ phone_Android          -1.1672      0.437     -2.672      0.008      -2.023     
 phone_iPhone           -0.0595      0.434     -0.137      0.891      -0.910       0.791
 black_True              0.9089      0.065     14.004      0.000       0.782       1.036
 =======================================================================================
+</pre>
