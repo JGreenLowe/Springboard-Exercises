@@ -67,6 +67,17 @@ black_True              0.9089      0.065     14.004      0.000       0.782     
 
 Using the scikit-learn library, I then tested this model against the 20% of the model that had been held in reserve, and the model performed excellently: the F1-score was 0.96, indicating that the model was almost always able to correctly classify 'new' data that the model had not previously seen. This is a strong indicator that the model is very likely to be valid, at least for datasets that are collected for similar groups of users over a similar time period.
 
+<pre>
+             precision    recall  f1-score   support
+
+       False      0.974     0.964     0.969      6386
+        True      0.938     0.954     0.946      3614
+
+   micro avg      0.960     0.960     0.960     10000
+   macro avg      0.956     0.959     0.957     10000
+weighted avg      0.961     0.960     0.960     10000
+</pre>
+
 The most important **positive** predictors of user retention appear to be "early_trips" (the number of trips that the user took within the first 30 days of signing up), "city_King's Landing", and "black_True". A user who took several trips early in their membership, lives in King's Landing, and used the Black service at least once in their first month of membership is much more likely to be retained than a user who does none of these things. The date of a user's first sign-in and last sign-in had large effect sizes, but should be ignored because they are intrinsically correlated with the dependent variable; by definition, a user with a high numeric value for thier last sign-in date is an active user. Relatedly, the day of the week on which a user signed up was statistically significant, but had such a small effect size that it can be safely disregarded.
 
 The most important **negative** predictors of user retention appear to be "user_rtg" (the rider's average rating received from their drivers across all of their trips), and "phone_Android" (the user's primary device was recorded as being an Android phone). It is difficult to interpret the finding that users who received higher ratings from their drivers were more likely to stop using the service. One possibility is that users who are very polite or deferential are treating their drivers nicely at the expense of their own comfort and user experience. It is also possible that this finding arose through chance; it was significant at the p ~ 0.01 level, meaning that we would expect similarly significant results to arise by chance alone about 1% of the time. 
