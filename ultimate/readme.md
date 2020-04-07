@@ -26,7 +26,15 @@ On the other hand, reducing surge pricing could also reduce short-term profits, 
 
 ## Predictive Modeling
 
-Blah.
+Using the data provided, I was able to determine that 36.6% of the riders were "retained," i.e., they took a trip within the last 30 days of the measurement period. The use of a 30-day period to determine whether riders are active is very reasonable for this data because there is a sharp drop-off in frequency past this point; as shown in the graph below, riders who have not ridden in the last 30 days appear to be rather unlikely to use the service again in the medium-term.
+
+![](https://github.com/JGreenLowe/Springboard-Exercises/blob/master/ultimate/dateoflastride.png)
+
+The data required relatively minimal cleaning. Two of the columns (driver_rating and user_rating) had occasional null values, which I filled in with the average rating for the dataset. One column (phone type) had several hundred null values, which I replaced with the string 'Neither' to indicate that the user was using some type of device other than an Android phone or iPhone. I converted columns to floats and Timestamp format as needed, and used pd.get_dummies to create dummy variables for categorical predictors such as phone type and city of origin. I then deleted one dummy variable from each category (e.g. city_Astapor) to avoid redundant data in the exogenous variables.
+
+Using the statsmodels library, I then built a logistic regression model, holding out a random sample of 20% of the data for validation. Logistic regression is appropriate here because the dependent variable is binary, i.e., each user is either "active" or "inactive." As shown in the results below, the logistic regression was highly fruitful, with pseudo R-squared of 0.86, indicating that most of the variation in the dependent variable can be successfully accounted for in terms of the independent variables. Multiple independent variables showed a p-value below 0.001, indicating that the effect sizes observed were very unlikely to have occurred by chance alone.
+
+
 <pre>
                            Logit Regression Results                           
 ==============================================================================
@@ -56,3 +64,13 @@ phone_iPhone           -0.0595      0.434     -0.137      0.891      -0.910     
 black_True              0.9089      0.065     14.004      0.000       0.782       1.036
 =======================================================================================
 </pre>
+
+Using the scikit-learn library, I then tested this model against the 20% of the model that had been held in reserve, and the model performed excellently: the F1-score was 0.96, indicating that the model was almost always able to correctly classify 'new' data that the model had not previously seen. This is a strong indicator that the model is very likely to be valid, at least for datasets that are collected for similar groups of users over a similar time period.
+
+The most important **positive** predictors of user retention appear to be "early_trips" (the number of trips that the user took within the first 30 days of signing up), "city_King's Landing", and "black_True". A user who took several trips early in their membership, lives in King's Landing, and used the Black service at least once in their first month of membership is much more likely to be retained than a user who does none of these things. The date of a user's first sign-in and last sign-in had large effect sizes, but should be ignored because they are intrinsically correlated with the dependent variable; by definition, a user with a high numeric value for thier last sign-in date is an active user. Relatedly, the day of the week on which a user signed up was statistically significant, but had such a small effect size that it can be safely disregarded.
+
+The most important **negative** predictors of user retention appear to be "user_rtg" (the rider's average rating received from their drivers across all of their trips), and "phone_Android" (the user's primary device was recorded as being an Android phone). It is difficult to interpret the finding that users who received higher ratings from their drivers were more likely to stop using the service. One possibility is that users who are very polite or deferential are treating their drivers nicely at the expense of their own comfort and user experience. It is also possible that this finding arose through chance; it was significant at the p ~ 0.01 level, meaning that we would expect similarly significant results to arise by chance alone about 1% of the time. 
+
+The finding that Android users were less likely to continue using Ultimate is perhaps more actionable -- I recommend conducting a study of the user interface for the Ultimate app for Android phones. If Android users are having difficulty installing or using the app, that may be pushing some of them to discontinue it use. Another possibility is that Android users are not seeing as many advertisements for Ultimate's service, or that the advertisements they do see are less effective (perhaps because the demographic that uses Androids is swayed by different types of advertising).
+
+To improve long-term rider retention based on this model, I would recommend studying the user interface and advertising for the Android Ultimate experience, giving users a discount on trips during their first month of use to encourage heavy use during this critical window, giving users a free ride on their first Black trip to encourage the use of this attractive service during this critical window, and interviewing drivers and heavy users in King's Landing to see what about the experience is working for them in the hopes of identifying features that can be exported to other cities. The free Black trip should ideally be conducted as an experiment (with only some riders, selected at random, getting the free ride) so that we can distinguish between the possibility that riding with Black helps retain users, and the possibility that users who are very likely to keep using Ultimate are more likely to try Black at least once.
