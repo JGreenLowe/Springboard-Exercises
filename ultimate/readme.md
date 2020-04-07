@@ -23,3 +23,35 @@ One important caveat is that there may be other factors that would affect the su
 My final recommendation to the city managers would depend on the expected profits from reducing surge pricing, the expected customer retention benefits from reducing surge pricing, the expected lost revenue from reducing surge pricing, and the expected costs of subsidizing bridge tolls. Presumably, surge pricing lowers Ultimate's profits by suppressing short-term demand for Ultimate's ride-sharing services. As prices rise, some consumers will decide that they would rather postpone their trips or use alternate methods of transportation; this leads to short-term lost revenue and lost profits. In addition, some consumers will presumably switch to other brands or make alternate long-term plans for their transportation if they are repeatedly disssatisfied with the frequency of surge pricing. Most customers will tolerate an occasional surge, but if prices always seem to be at surge prices whenever the customer wants to travel, then the customer may decide that Ultimate is not offering a good value. Therefore, I would anticipate that customer retention is negatively correlated with average surge pricing. 
 
 On the other hand, reducing surge pricing could also reduce short-term profits, because Ultimate presumably earns a percentage commission on each transaction, so if the price per transaction goes down (because surges have been made unnecessary) then Ultimate's revenue per transaction will also go down. If the bridge subsidy experiment works, then Ultimate would be left with a larger volume of lower-priced transactions, which could actually cause a net loss in Ultimate's profits, especially if Ultimate has a degree of monopoly power in the ride-sharing industry. In addition, there is the cost of the bridge subsidy which must be paid -- unless the experiment generates more in new profits and retained customers than it costs in bridge tolls, then the new policy is not financially viable. Therefore, I would recommend making the subsidy permanent if and only if the expected profits from increased transactions and increased customer retention are likely to outweigh the expected lost revenue from reducing pricing and the expected costs of paying for bridge tolls.
+
+## Predictive Modeling
+
+Blah.
+
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                      y   No. Observations:                40000
+Model:                          Logit   Df Residuals:                    39986
+Method:                           MLE   Df Model:                           13
+Date:                Wed, 01 Apr 2020   Pseudo R-squ.:                  0.8642
+Time:                        22:04:54   Log-Likelihood:                -3572.1
+converged:                       True   LL-Null:                       -26302.
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+=======================================================================================
+                          coef    std err          z      P>|z|      [0.025      0.975]
+---------------------------------------------------------------------------------------
+early_trips             0.0615      0.009      6.738      0.000       0.044       0.079
+signup              -2.508e-06   4.19e-08    -59.832      0.000   -2.59e-06   -2.43e-06
+driver_rtg             -0.0328      0.055     -0.594      0.553      -0.141       0.075
+surge                  -0.1412      0.320     -0.441      0.659      -0.769       0.487
+last_trip            2.487e-06   4.16e-08     59.841      0.000    2.41e-06    2.57e-06
+surge_pct               0.0017      0.003      0.562      0.574      -0.004       0.008
+weekday                 0.0061      0.001      6.433      0.000       0.004       0.008
+dist                   -0.0022      0.006     -0.375      0.708      -0.014       0.009
+user_rtg               -0.2126      0.081     -2.610      0.009      -0.372      -0.053
+city_King's Landing     1.9498      0.090     21.752      0.000       1.774       2.125
+city_Winterfell         0.5182      0.071      7.309      0.000       0.379       0.657
+phone_Android          -1.1672      0.437     -2.672      0.008      -2.023      -0.311
+phone_iPhone           -0.0595      0.434     -0.137      0.891      -0.910       0.791
+black_True              0.9089      0.065     14.004      0.000       0.782       1.036
+=======================================================================================
